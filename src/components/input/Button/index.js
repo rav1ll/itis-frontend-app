@@ -2,12 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 
+const StyledButton = styled.button`
+  cursor: pointer;
+  
 
-const StyledButton = styled.div`
-  background-color: red;
+  border: 3px solid #379683;
+  border-radius: 6px;
+
+  color: #484f4f;
+  background-color: inherit;
 `;
 
 
-export default function Button({ className }) {
-    return <StyledButton className={className}  />
+export default function Button({className, children, onClick}) {
+    return <StyledButton className={className} onClick={onClick}>{children}</StyledButton>
 }
