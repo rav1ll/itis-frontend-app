@@ -14,7 +14,7 @@ export default function Login() {
         <Form>
           <TextField label="login" />
           <PasswordField label="password" />
-          <Button>Log in</Button>
+          <Button type="submit">Log in</Button>
         </Form>
       </PageWrapper>
     </DefaultLayout>
