@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../components/inputs/Button";
 import DefaultLayout from "../components/DefaultLayout/DefaultLayout";
 import BaseInput from "../components/inputs/BaseInput";
+import {PasswordInput} from "../components/inputs/PasswordInput";
 
 const LoginButton = styled(Button)`
   font-size: 2em;
@@ -12,6 +13,7 @@ const LoginButton = styled(Button)`
 export default function Login() {
     return <DefaultLayout title={'Login Page'}>
         Login page
+        <PasswordInput />
         <BaseInput/>
         <LoginButton >Log in</LoginButton>
     </DefaultLayout>
