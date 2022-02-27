@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Button from "../components/input/Button";
+import Button from "../components/inputs/Button";
 import DefaultLayout from "../components/DefaultLayout/DefaultLayout";
 
 const LoginButton = styled(Button)`
