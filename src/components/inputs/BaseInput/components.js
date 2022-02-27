@@ -6,7 +6,9 @@ export const StyledInput = styled.input`
 `;
 
 export const Container = styled.div`
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
   padding: 0.2em;
   border: 3px solid #379683;
   border-radius: 6px;
