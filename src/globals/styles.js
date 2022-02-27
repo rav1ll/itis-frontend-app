@@ -3,9 +3,9 @@ import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
   ${reset}
-  @import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
   * {
-    font-family: 'ZCOOL QingKe HuangYou', cursive !important;
+    font-family: 'Nunito' !important;
     box-sizing: border-box;
   }
 `

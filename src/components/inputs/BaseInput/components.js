@@ -11,10 +11,17 @@ export const Container = styled.div`
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.2em;
-  border: 3px solid #379683;
-  border-radius: 6px;
+
   width: 100%;
+  min-height: 45px;
+  background-color: white;
+
+  padding: 0.2em;
+  border: 3px solid #bb7db2;
+  border-radius: 6px;
 `
 
-export const SlotContainer = styled.div``;
+export const SlotContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
