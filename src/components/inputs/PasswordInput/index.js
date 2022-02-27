@@ -2,6 +2,10 @@ import React from "react";
 import BaseInput from "../BaseInput";
 import VisibilityButton from "./components/VisibilityButton";
 
-export function PasswordInput({isHidden, leftSlot, ...props}) {
-    return <BaseInput {...props} rightSlot={<VisibilityButton isHidden={isHidden}/>}/>
+export function PasswordInput({isHidden = true, leftSlot, type, ...props}) {
+    return <BaseInput
+        type={isHidden ? 'password' : 'text'}
+        rightSlot={<VisibilityButton isHidden={isHidden}/>}
+        {...props}
+    />
 }

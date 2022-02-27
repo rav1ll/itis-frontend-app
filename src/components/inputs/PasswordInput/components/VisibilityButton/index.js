@@ -5,6 +5,6 @@ import {ReactComponent as VisibilityOff} from "./icons/visibilityOff.svg";
 
 export default function VisibilityButton({isHidden, ...props}) {
     return <StyledButton {...props}>
-        {isHidden ? <Visibility/> : <VisibilityOff/>}
+        {isHidden ? <VisibilityOff/> : <Visibility/>}
     </StyledButton>
 }
