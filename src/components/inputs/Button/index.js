@@ -5,6 +5,7 @@ import styled from "styled-components";
 const StyledButton = styled.button`
   border: 3px solid #379683;
   border-radius: 6px;
+  font-size: 1em;
 
   color: #484f4f;
   background-color: inherit;

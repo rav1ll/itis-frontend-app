@@ -6,5 +6,6 @@ export default createGlobalStyle`
   @import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
   * {
     font-family: 'ZCOOL QingKe HuangYou', cursive !important;
+    box-sizing: border-box;
   }
 `

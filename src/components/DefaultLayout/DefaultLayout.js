@@ -1,9 +1,9 @@
 import React from "react";
 
-import {Header, HeaderTitle, AppName} from './components'
+import {Header, HeaderTitle, AppName, Content} from './components'
 
 export default function DefaultLayout({title, children}) {
-    return <div>
+    return <Content>
         <Header>
             <HeaderTitle>{title}</HeaderTitle>
             <AppName>Task tracker</AppName>
@@ -11,5 +11,5 @@ export default function DefaultLayout({title, children}) {
         <main>
             {children}
         </main>
-    </div>
+    </Content>
 }
