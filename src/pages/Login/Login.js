@@ -9,6 +9,11 @@ import { Form, PageWrapper } from "./components";
 
 export default function Login () {
   const [formState, setFormState] = useState({ login: "", password: "" });
+  const [eyeState, setEyeState] = useState(true);
+
+  const onAyeClick = useCallback(() => {
+    setEyeState((state) => !state);
+  }, []);
 
   const handleEvents = useCallback((event) => {
     const { value, id } = event.target;
@@ -41,6 +46,8 @@ export default function Login () {
             value={formState.password}
             onChange={handleEvents}
             onBlur={handleEvents}
+            onEyeClick={onAyeClick}
+            isHidden={eyeState}
           />
           <Button type="submit">Log in</Button>
         </Form>
