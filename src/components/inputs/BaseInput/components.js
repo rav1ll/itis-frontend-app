@@ -5,6 +5,7 @@ export const StyledInput = styled.input`
   background: unset;
   outline: unset;
   width: 100%;
+  font-size: 1em;
 `;
 
 export const Container = styled.div`
