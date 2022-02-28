@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Button from "../../components/inputs/Button";
 import DefaultLayout from "../../components/DefaultLayout/DefaultLayout";
@@ -7,13 +7,48 @@ import TextField from "../../components/formFields/TextField";
 
 import { Form, PageWrapper } from "./components";
 
-export default function Login() {
+export default function Login () {
+  const [formState, setFormState] = useState({ login: "", password: "" });
+  const [eyeState, setEyeState] = useState(true);
+
+  const onAyeClick = useCallback(() => {
+    setEyeState((state) => !state);
+  }, []);
+
+  const handleEvents = useCallback((event) => {
+    const { value, id } = event.target;
+    const { type } = event;
+
+    setFormState(
+      (currentState) => (
+        {
+          ...currentState,
+          [id]: type === "blur" ? value.trim() : value,
+        }
+      ),
+    );
+  }, []);
+
   return (
     <DefaultLayout title={"Login Page"}>
       <PageWrapper>
         <Form>
-          <TextField label="login" />
-          <PasswordField label="password" />
+          <TextField
+            id="login"
+            label="login"
+            value={formState.login}
+            onChange={handleEvents}
+            onBlur={handleEvents}
+          />
+          <PasswordField
+            id="password"
+            label="password"
+            value={formState.password}
+            onChange={handleEvents}
+            onBlur={handleEvents}
+            onEyeClick={onAyeClick}
+            isHidden={eyeState}
+          />
           <Button type="submit">Log in</Button>
         </Form>
       </PageWrapper>
