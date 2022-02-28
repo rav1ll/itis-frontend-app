@@ -1,10 +1,19 @@
-import Login from "./pages/Login/Login";
+import Login from "./pages/Login";
+import Index from "./pages/Index";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-function App() {
+function App () {
   return (
-      <div>
-        <Login/>
-      </div>
+    <Router>
+      <Routes>
+        <Route path={"/"} element={<Index/>}/>
+        <Route path={"/login"} element={<Login/>}/>
+      </Routes>
+    </Router>
   );
 }
 
