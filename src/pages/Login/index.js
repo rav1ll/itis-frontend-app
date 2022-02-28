@@ -7,7 +7,7 @@ import TextField from "../../components/formFields/TextField";
 
 import { Form, PageWrapper } from "./components";
 
-export default function Login () {
+export default function Index () {
   const [formState, setFormState] = useState({ login: "", password: "" });
   const [eyeState, setEyeState] = useState(true);
 
@@ -30,7 +30,7 @@ export default function Login () {
   }, []);
 
   return (
-    <DefaultLayout title={"Login Page"}>
+    <DefaultLayout title={"Index Page"}>
       <PageWrapper>
         <Form>
           <TextField
