@@ -5,15 +5,18 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { AuthUser } from "./globals/AuthUser";
 
 function App () {
   return (
-    <Router>
-      <Routes>
-        <Route path={"/"} element={<Index/>}/>
-        <Route path={"/login"} element={<Login/>}/>
-      </Routes>
-    </Router>
+    <AuthUser>
+      <Router>
+        <Routes>
+          <Route path={"/"} element={<Index/>}/>
+          <Route path={"/login"} element={<Login/>}/>
+        </Routes>
+      </Router>
+    </AuthUser>
   );
 }
 
