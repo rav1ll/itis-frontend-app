@@ -67,6 +67,7 @@ export default function Registration() {
             onChange={handleEvents}
             onBlur={handleEvents}
             value={formState.firstName}
+            error={errorsState.firstName}
         />
         <TextField
             label={'Last name'}
@@ -74,6 +75,7 @@ export default function Registration() {
             onChange={handleEvents}
             onBlur={handleEvents}
             value={formState.lastName}
+            error={errorsState.lastName}
         />
         <PasswordField
             label={'Password'}
@@ -81,6 +83,7 @@ export default function Registration() {
             onChange={handleEvents}
             onBlur={handleEvents}
             value={formState.password}
+            error={errorsState.password}
             onEyeClick={onAyeClick}
             isHidden={eyeState}
         />

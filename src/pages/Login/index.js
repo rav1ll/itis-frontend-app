@@ -45,6 +45,7 @@ export default function Index () {
             id="password"
             label="password"
             value={formState.password}
+            error={errorsState.password}
             onChange={handleEvents}
             onBlur={handleEvents}
             onEyeClick={onAyeClick}
