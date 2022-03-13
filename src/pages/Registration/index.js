@@ -5,14 +5,44 @@ import useHandleChangeField from "../../components/form/utils/useHandleChangeFie
 import TextField from "../../components/form/formFields/TextField";
 import PasswordField from "../../components/form/formFields/PasswordField";
 import Button from "../../components/form/inputs/Button";
+import emailValidator from "../../validators/emailValidator";
+import useSharedValidation from "../../validators/useSharedValidation";
+import getFirstError from "../../validators/getFirstError";
+import emptyValidator from "../../validators/emptyValidator";
+import latinNumbersValidator from "../../validators/latinNumbersValidator";
+import minLengthValidatorBuilder from "../../validators/minLengthValidatorBuilder";
+import maxLengthValidatorBuilder from "../../validators/maxLengthValidatorBuilder";
+
+const INITIAL_FORM_STATE = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+};
+
+const VALIDATION_CONFIG = {
+    email: (value) => getFirstError([emptyValidator, emailValidator], value),
+    firstName: (value) => getFirstError([
+        emptyValidator,
+        minLengthValidatorBuilder(2),
+        maxLengthValidatorBuilder(10),
+        latinNumbersValidator
+    ], value),
+    lastName: (value) => getFirstError([
+        emptyValidator,
+        minLengthValidatorBuilder(2),
+        maxLengthValidatorBuilder(10),
+        latinNumbersValidator
+    ], value),
+    password: (value) => getFirstError([
+        emptyValidator,
+        minLengthValidatorBuilder(8),
+    ], value),
+}
 
 export default function Registration() {
-    const [formState, setFormState] = useState({
-        email: '',
-        firstName: '',
-        lastName: '',
-        password: '',
-    });
+    const [formState, setFormState] = useState(INITIAL_FORM_STATE);
+    const errorsState = useSharedValidation(formState, VALIDATION_CONFIG);
 
     const [eyeState, setEyeState] = useState(true);
 
@@ -29,6 +59,7 @@ export default function Registration() {
             onChange={handleEvents}
             onBlur={handleEvents}
             value={formState.email}
+            error={errorsState.email}
         />
         <TextField
             label={'First name'}
@@ -36,6 +67,7 @@ export default function Registration() {
             onChange={handleEvents}
             onBlur={handleEvents}
             value={formState.firstName}
+            error={errorsState.firstName}
         />
         <TextField
             label={'Last name'}
@@ -43,6 +75,7 @@ export default function Registration() {
             onChange={handleEvents}
             onBlur={handleEvents}
             value={formState.lastName}
+            error={errorsState.lastName}
         />
         <PasswordField
             label={'Password'}
@@ -50,6 +83,7 @@ export default function Registration() {
             onChange={handleEvents}
             onBlur={handleEvents}
             value={formState.password}
+            error={errorsState.password}
             onEyeClick={onAyeClick}
             isHidden={eyeState}
         />
