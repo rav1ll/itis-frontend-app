@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
-import Button from "../../components/inputs/Button";
-import DefaultLayout from "../../components/DefaultLayout/DefaultLayout";
-import PasswordField from "../../components/formFields/PasswordField";
-import TextField from "../../components/formFields/TextField";
-
-import { Form, PageWrapper } from "./components";
+import OneFormLayout from "../../components/Layouts/OneFormLayout";
+import Button from "../../components/form/inputs/Button";
+import PasswordField from "../../components/form/formFields/PasswordField";
+import TextField from "../../components/form/formFields/TextField";
+import useHandleChangeField from "../../components/form/utils/useHandleChangeField";
 
 export default function Index () {
   const [formState, setFormState] = useState({ login: "", password: "" });
@@ -15,25 +14,11 @@ export default function Index () {
     setEyeState((state) => !state);
   }, []);
 
-  const handleEvents = useCallback((event) => {
-    const { value, id } = event.target;
-    const { type } = event;
-
-    setFormState(
-      (currentState) => (
-        {
-          ...currentState,
-          [id]: type === "blur" ? value.trim() : value,
-        }
-      ),
-    );
-  }, []);
+  const handleEvents = useHandleChangeField(setFormState);
 
   return (
-    <DefaultLayout title={"Index Page"}>
-      <PageWrapper>
-        <Form>
-          <TextField
+    <OneFormLayout>
+      <TextField
             id="login"
             label="login"
             value={formState.login}
@@ -50,8 +35,6 @@ export default function Index () {
             isHidden={eyeState}
           />
           <Button type="submit">Log in</Button>
-        </Form>
-      </PageWrapper>
-    </DefaultLayout>
+    </OneFormLayout>
   );
 }
