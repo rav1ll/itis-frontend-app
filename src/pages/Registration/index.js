@@ -42,7 +42,7 @@ const VALIDATION_CONFIG = {
 
 export default function Registration() {
     const [formState, setFormState] = useState(INITIAL_FORM_STATE);
-    const errorsState = useSharedValidation(formState, VALIDATION_CONFIG);
+    const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
 
     const [eyeState, setEyeState] = useState(true);
 
@@ -87,6 +87,6 @@ export default function Registration() {
             onEyeClick={onAyeClick}
             isHidden={eyeState}
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit" disabled={isHasError}>Register</Button>
     </OneFormLayout>
 }

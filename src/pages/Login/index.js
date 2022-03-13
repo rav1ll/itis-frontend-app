@@ -22,7 +22,7 @@ const VALIDATION_CONFIG = {
 
 export default function Index () {
   const [formState, setFormState] = useState(INITIAL_FORM_STATE);
-  const errorsState = useSharedValidation(formState, VALIDATION_CONFIG);
+  const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
 
   const [eyeState, setEyeState] = useState(true);
   const onAyeClick = useCallback(() => {
@@ -51,7 +51,7 @@ export default function Index () {
             onEyeClick={onAyeClick}
             isHidden={eyeState}
           />
-          <Button type="submit">Log in</Button>
+          <Button type="submit" disabled={isHasError}>Log in</Button>
     </OneFormLayout>
   );
 }
