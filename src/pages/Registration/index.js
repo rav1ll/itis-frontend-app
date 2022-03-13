@@ -5,13 +5,13 @@ import useHandleChangeField from "../../components/form/utils/useHandleChangeFie
 import TextField from "../../components/form/formFields/TextField";
 import PasswordField from "../../components/form/formFields/PasswordField";
 import Button from "../../components/form/inputs/Button";
-import emailValidator from "../../validators/emailValidator";
+import emailValidator from "../../validators/stringValidators/emailValidator";
 import useSharedValidation from "../../validators/useSharedValidation";
-import getFirstError from "../../validators/getFirstError";
-import emptyValidator from "../../validators/emptyValidator";
-import latinNumbersValidator from "../../validators/latinNumbersValidator";
-import minLengthValidatorBuilder from "../../validators/minLengthValidatorBuilder";
-import maxLengthValidatorBuilder from "../../validators/maxLengthValidatorBuilder";
+import getFirstError from "../../validators/helpers/getFirstError";
+import emptyValidator from "../../validators/stringValidators/emptyValidator";
+import latinNumbersValidator from "../../validators/stringValidators/latinNumbersValidator";
+import minLengthValidatorBuilder from "../../validators/stringValidators/minLengthValidatorBuilder";
+import maxLengthValidatorBuilder from "../../validators/stringValidators/maxLengthValidatorBuilder";
 
 const INITIAL_FORM_STATE = {
     email: '',
