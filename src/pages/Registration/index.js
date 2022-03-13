@@ -12,6 +12,7 @@ import emptyValidator from "../../validators/stringValidators/emptyValidator";
 import latinNumbersValidator from "../../validators/stringValidators/latinNumbersValidator";
 import minLengthValidatorBuilder from "../../validators/stringValidators/minLengthValidatorBuilder";
 import maxLengthValidatorBuilder from "../../validators/stringValidators/maxLengthValidatorBuilder";
+import useRequiredFieldsFilled from "../../validators/useRequiredFieldsFilled";
 
 const INITIAL_FORM_STATE = {
     email: '',
@@ -50,6 +51,8 @@ export default function Registration() {
         setEyeState((state) => !state);
     }, []);
 
+    const isRequiredFieldFilled = useRequiredFieldsFilled(formState, Object.keys(INITIAL_FORM_STATE));
+
     const handleEvents = useHandleChangeField(setFormState);
 
     return <OneFormLayout>
@@ -87,6 +90,6 @@ export default function Registration() {
             onEyeClick={onAyeClick}
             isHidden={eyeState}
         />
-        <Button type="submit" disabled={isHasError}>Register</Button>
+        <Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>Register</Button>
     </OneFormLayout>
 }

@@ -10,6 +10,7 @@ import useSharedValidation from "../../validators/useSharedValidation";
 import getFirstError from "../../validators/helpers/getFirstError";
 import emptyValidator from "../../validators/stringValidators/emptyValidator";
 import minLengthValidatorBuilder from "../../validators/stringValidators/minLengthValidatorBuilder";
+import useRequiredFieldsFilled from "../../validators/useRequiredFieldsFilled";
 
 const INITIAL_FORM_STATE = { login: "", password: "" };
 const VALIDATION_CONFIG = {
@@ -23,6 +24,8 @@ const VALIDATION_CONFIG = {
 export default function Index () {
   const [formState, setFormState] = useState(INITIAL_FORM_STATE);
   const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
+
+  const isRequiredFieldFilled = useRequiredFieldsFilled(formState,Object.keys(INITIAL_FORM_STATE));
 
   const [eyeState, setEyeState] = useState(true);
   const onAyeClick = useCallback(() => {
@@ -51,7 +54,7 @@ export default function Index () {
             onEyeClick={onAyeClick}
             isHidden={eyeState}
           />
-          <Button type="submit" disabled={isHasError}>Log in</Button>
+          <Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>Log in</Button>
     </OneFormLayout>
   );
 }
