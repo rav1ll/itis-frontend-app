@@ -5,13 +5,14 @@ import useHandleChangeField from "../../components/form/utils/useHandleChangeFie
 import TextField from "../../components/form/formFields/TextField";
 import PasswordField from "../../components/form/formFields/PasswordField";
 import Button from "../../components/form/inputs/Button";
-import emailValidator from "../../validators/emailValidator";
+import emailValidator from "../../validators/stringValidators/emailValidator";
 import useSharedValidation from "../../validators/useSharedValidation";
-import getFirstError from "../../validators/getFirstError";
-import emptyValidator from "../../validators/emptyValidator";
-import latinNumbersValidator from "../../validators/latinNumbersValidator";
-import minLengthValidatorBuilder from "../../validators/minLengthValidatorBuilder";
-import maxLengthValidatorBuilder from "../../validators/maxLengthValidatorBuilder";
+import getFirstError from "../../validators/helpers/getFirstError";
+import emptyValidator from "../../validators/stringValidators/emptyValidator";
+import latinNumbersValidator from "../../validators/stringValidators/latinNumbersValidator";
+import minLengthValidatorBuilder from "../../validators/stringValidators/minLengthValidatorBuilder";
+import maxLengthValidatorBuilder from "../../validators/stringValidators/maxLengthValidatorBuilder";
+import useRequiredFieldsFilled from "../../validators/useRequiredFieldsFilled";
 
 const INITIAL_FORM_STATE = {
     email: '',
@@ -42,13 +43,15 @@ const VALIDATION_CONFIG = {
 
 export default function Registration() {
     const [formState, setFormState] = useState(INITIAL_FORM_STATE);
-    const errorsState = useSharedValidation(formState, VALIDATION_CONFIG);
+    const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
 
     const [eyeState, setEyeState] = useState(true);
 
     const onAyeClick = useCallback(() => {
         setEyeState((state) => !state);
     }, []);
+
+    const isRequiredFieldFilled = useRequiredFieldsFilled(formState, Object.keys(INITIAL_FORM_STATE));
 
     const handleEvents = useHandleChangeField(setFormState);
 
@@ -87,6 +90,6 @@ export default function Registration() {
             onEyeClick={onAyeClick}
             isHidden={eyeState}
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>Register</Button>
     </OneFormLayout>
 }
