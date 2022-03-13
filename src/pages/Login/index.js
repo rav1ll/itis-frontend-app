@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 
+import OneFormLayout from "../../components/Layouts/OneFormLayout";
 import Button from "../../components/inputs/Button";
-import DefaultLayout from "../../components/DefaultLayout/DefaultLayout";
 import PasswordField from "../../components/formFields/PasswordField";
 import TextField from "../../components/formFields/TextField";
-
-import { Form, PageWrapper } from "./components";
 
 export default function Index () {
   const [formState, setFormState] = useState({ login: "", password: "" });
@@ -30,10 +28,8 @@ export default function Index () {
   }, []);
 
   return (
-    <DefaultLayout title={"Index Page"}>
-      <PageWrapper>
-        <Form>
-          <TextField
+    <OneFormLayout>
+      <TextField
             id="login"
             label="login"
             value={formState.login}
@@ -50,8 +46,6 @@ export default function Index () {
             isHidden={eyeState}
           />
           <Button type="submit">Log in</Button>
-        </Form>
-      </PageWrapper>
-    </DefaultLayout>
+    </OneFormLayout>
   );
 }

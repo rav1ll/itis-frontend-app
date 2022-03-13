@@ -1,5 +1,7 @@
 import React from 'react';
 
+import OneFormLayout from "../../components/Layouts/OneFormLayout";
+
 export default function Registration() {
-    return <>Registration page</>
+    return <OneFormLayout>Registration page</OneFormLayout>
 }
