@@ -9,6 +9,7 @@ import emailValidator from "../../validators/emailValidator";
 import useSharedValidation from "../../validators/useSharedValidation";
 import getFirstError from "../../validators/getFirstError";
 import emptyValidator from "../../validators/emptyValidator";
+import latinNumbersValidator from "../../validators/latinNumbersValidator";
 
 const INITIAL_FORM_STATE = {
     email: '',
@@ -18,7 +19,9 @@ const INITIAL_FORM_STATE = {
 };
 
 const VALIDATION_CONFIG = {
-    email: (value)=> getFirstError([emptyValidator,emailValidator],value),
+    email: (value) => getFirstError([emptyValidator, emailValidator], value),
+    firstName: (value) => getFirstError([emptyValidator, latinNumbersValidator], value),
+    lastName: (value) => getFirstError([emptyValidator, latinNumbersValidator], value),
 }
 
 export default function Registration() {
