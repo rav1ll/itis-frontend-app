@@ -6,11 +6,11 @@ export default function BaseInput({
                                       className,
                                       leftSlot,
                                       rightSlot,
-                                      error,
+                                      isError,
                                       ...props
                                   }) {
     return (
-        <Container className={className} $isError={!!error}>
+        <Container className={className} $isError={isError}>
             {leftSlot && <SlotContainer>{leftSlot}</SlotContainer>}
             <StyledInput {...props} />
             {rightSlot && <SlotContainer>{rightSlot}</SlotContainer>}
