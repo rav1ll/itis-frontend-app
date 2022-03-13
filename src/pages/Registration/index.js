@@ -6,6 +6,9 @@ import TextField from "../../components/form/formFields/TextField";
 import PasswordField from "../../components/form/formFields/PasswordField";
 import Button from "../../components/form/inputs/Button";
 import emailValidator from "../../validators/emailValidator";
+import useSharedValidation from "../../validators/useSharedValidation";
+import getFirstError from "../../validators/getFirstError";
+import emptyValidator from "../../validators/emptyValidator";
 
 const INITIAL_FORM_STATE = {
     email: '',
@@ -14,13 +17,13 @@ const INITIAL_FORM_STATE = {
     password: '',
 };
 
+const VALIDATION_CONFIG = {
+    email: (value)=> getFirstError([emptyValidator,emailValidator],value),
+}
+
 export default function Registration() {
     const [formState, setFormState] = useState(INITIAL_FORM_STATE);
-    const [errorsState, setErrorsState] = useState(INITIAL_FORM_STATE);
-
-    useEffect(()=>{
-        setErrorsState((currentState)=> ({...currentState, email: emailValidator(formState.login) }));
-    },[formState.email]);
+    const errorsState = useSharedValidation(formState, VALIDATION_CONFIG);
 
     const [eyeState, setEyeState] = useState(true);
 

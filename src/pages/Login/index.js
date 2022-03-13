@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useState} from "react";
 
 import OneFormLayout from "../../components/Layouts/OneFormLayout";
 import Button from "../../components/form/inputs/Button";
@@ -6,12 +6,18 @@ import PasswordField from "../../components/form/formFields/PasswordField";
 import TextField from "../../components/form/formFields/TextField";
 import useHandleChangeField from "../../components/form/utils/useHandleChangeField";
 import emailValidator from "../../validators/emailValidator";
+import useSharedValidation from "../../validators/useSharedValidation";
+import getFirstError from "../../validators/getFirstError";
+import emptyValidator from "../../validators/emptyValidator";
 
 const INITIAL_FORM_STATE = { login: "", password: "" };
+const VALIDATION_CONFIG = {
+    login: (value)=> getFirstError([emptyValidator,emailValidator],value),
+}
 
 export default function Index () {
   const [formState, setFormState] = useState(INITIAL_FORM_STATE);
-  const [errorsState, setErrorsState] = useState(INITIAL_FORM_STATE);
+  const errorsState = useSharedValidation(formState, VALIDATION_CONFIG);
 
   const [eyeState, setEyeState] = useState(true);
   const onAyeClick = useCallback(() => {
@@ -19,10 +25,6 @@ export default function Index () {
   }, []);
 
   const handleEvents = useHandleChangeField(setFormState);
-
-  useEffect(()=>{
-      setErrorsState((currentState)=> ({...currentState, login: emailValidator(formState.login) }));
-  },[formState.login]);
 
   return (
     <OneFormLayout>
