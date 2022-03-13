@@ -7,7 +7,7 @@ export default function TextField({label, error, ...props}) {
     return (
         <BaseWrapper label={label}>
             <BaseInput isError={!!error} {...props} />
-            <ShowError error={error}/>
+            <ShowError error={error} mt={0.25}/>
         </BaseWrapper>
     );
 }
