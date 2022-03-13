@@ -11,6 +11,7 @@ import getFirstError from "../../validators/getFirstError";
 import emptyValidator from "../../validators/emptyValidator";
 import latinNumbersValidator from "../../validators/latinNumbersValidator";
 import minLengthValidatorBuilder from "../../validators/minLengthValidatorBuilder";
+import maxLengthValidatorBuilder from "../../validators/maxLengthValidatorBuilder";
 
 const INITIAL_FORM_STATE = {
     email: '',
@@ -24,11 +25,13 @@ const VALIDATION_CONFIG = {
     firstName: (value) => getFirstError([
         emptyValidator,
         minLengthValidatorBuilder(2),
+        maxLengthValidatorBuilder(10),
         latinNumbersValidator
     ], value),
     lastName: (value) => getFirstError([
         emptyValidator,
         minLengthValidatorBuilder(2),
+        maxLengthValidatorBuilder(10),
         latinNumbersValidator
     ], value),
     password: (value) => getFirstError([
