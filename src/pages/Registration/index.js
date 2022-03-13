@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import OneFormLayout from "../../components/Layouts/OneFormLayout";
 import useHandleChangeField from "../../components/form/utils/useHandleChangeField";
@@ -10,6 +10,7 @@ import useSharedValidation from "../../validators/useSharedValidation";
 import getFirstError from "../../validators/getFirstError";
 import emptyValidator from "../../validators/emptyValidator";
 import latinNumbersValidator from "../../validators/latinNumbersValidator";
+import minLengthValidatorBuilder from "../../validators/minLengthValidatorBuilder";
 
 const INITIAL_FORM_STATE = {
     email: '',
@@ -20,8 +21,20 @@ const INITIAL_FORM_STATE = {
 
 const VALIDATION_CONFIG = {
     email: (value) => getFirstError([emptyValidator, emailValidator], value),
-    firstName: (value) => getFirstError([emptyValidator, latinNumbersValidator], value),
-    lastName: (value) => getFirstError([emptyValidator, latinNumbersValidator], value),
+    firstName: (value) => getFirstError([
+        emptyValidator,
+        minLengthValidatorBuilder(2),
+        latinNumbersValidator
+    ], value),
+    lastName: (value) => getFirstError([
+        emptyValidator,
+        minLengthValidatorBuilder(2),
+        latinNumbersValidator
+    ], value),
+    password: (value) => getFirstError([
+        emptyValidator,
+        minLengthValidatorBuilder(8),
+    ], value),
 }
 
 export default function Registration() {

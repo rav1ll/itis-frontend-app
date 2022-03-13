@@ -9,10 +9,15 @@ import emailValidator from "../../validators/emailValidator";
 import useSharedValidation from "../../validators/useSharedValidation";
 import getFirstError from "../../validators/getFirstError";
 import emptyValidator from "../../validators/emptyValidator";
+import minLengthValidatorBuilder from "../../validators/minLengthValidatorBuilder";
 
 const INITIAL_FORM_STATE = { login: "", password: "" };
 const VALIDATION_CONFIG = {
     login: (value)=> getFirstError([emptyValidator,emailValidator],value),
+    password: (value) => getFirstError([
+        emptyValidator,
+        minLengthValidatorBuilder(8),
+    ], value),
 }
 
 export default function Index () {
