@@ -1,5 +1,5 @@
-import reset from "styled-reset";
-import { createGlobalStyle } from 'styled-components'
+import reset from 'styled-reset';
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   ${reset}
@@ -8,4 +8,4 @@ export default createGlobalStyle`
     font-family: 'Nunito' !important;
     box-sizing: border-box;
   }
-`
+`;

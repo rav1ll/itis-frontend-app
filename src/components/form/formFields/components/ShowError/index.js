@@ -1,6 +1,6 @@
-import React from "react";
-import {Container} from "./components";
+import React from 'react';
+import { Container } from './components';
 
-export default function ShowError({error, mt}) {
-    return error ? <Container $mt={mt}>{error}</Container> : null;
+export default function ShowError({ error, mt }) {
+	return error ? <Container $mt={mt}>{error}</Container> : null;
 }

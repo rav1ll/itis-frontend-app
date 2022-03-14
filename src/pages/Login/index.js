@@ -1,60 +1,52 @@
-import React, {useCallback, useState} from "react";
+import React, { useCallback, useState } from 'react';
 
-import OneFormLayout from "../../components/Layouts/OneFormLayout";
-import Button from "../../components/form/inputs/Button";
-import PasswordField from "../../components/form/formFields/PasswordField";
-import TextField from "../../components/form/formFields/TextField";
-import useHandleChangeField from "../../components/form/utils/useHandleChangeField";
-import emailValidator from "../../validators/stringValidators/emailValidator";
-import useSharedValidation from "../../validators/useSharedValidation";
-import getFirstError from "../../validators/helpers/getFirstError";
-import emptyValidator from "../../validators/stringValidators/emptyValidator";
-import minLengthValidatorBuilder from "../../validators/stringValidators/minLengthValidatorBuilder";
-import useRequiredFieldsFilled from "../../validators/useRequiredFieldsFilled";
+import OneFormLayout from '../../components/Layouts/OneFormLayout';
+import Button from '../../components/form/inputs/Button';
+import PasswordField from '../../components/form/formFields/PasswordField';
+import TextField from '../../components/form/formFields/TextField';
+import useHandleChangeField from '../../components/form/utils/useHandleChangeField';
+import emailValidator from '../../validators/stringValidators/emailValidator';
+import useSharedValidation from '../../validators/useSharedValidation';
+import getFirstError from '../../validators/helpers/getFirstError';
+import emptyValidator from '../../validators/stringValidators/emptyValidator';
+import minLengthValidatorBuilder from '../../validators/stringValidators/minLengthValidatorBuilder';
+import useRequiredFieldsFilled from '../../validators/useRequiredFieldsFilled';
 
-const INITIAL_FORM_STATE = { login: "", password: "" };
+const INITIAL_FORM_STATE = { login: '', password: '' };
 const VALIDATION_CONFIG = {
-    login: (value)=> getFirstError([emptyValidator,emailValidator],value),
-    password: (value) => getFirstError([
-        emptyValidator,
-        minLengthValidatorBuilder(8),
-    ], value),
-}
+	login: (value) => getFirstError([emptyValidator, emailValidator], value),
+	password: (value) => getFirstError([emptyValidator, minLengthValidatorBuilder(8)], value)
+};
 
-export default function Index () {
-  const [formState, setFormState] = useState(INITIAL_FORM_STATE);
-  const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
+export default function Index() {
+	const [formState, setFormState] = useState(INITIAL_FORM_STATE);
+	const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
 
-  const isRequiredFieldFilled = useRequiredFieldsFilled(formState,Object.keys(INITIAL_FORM_STATE));
+	const isRequiredFieldFilled = useRequiredFieldsFilled(formState, Object.keys(INITIAL_FORM_STATE));
 
-  const [eyeState, setEyeState] = useState(true);
-  const onAyeClick = useCallback(() => {
-    setEyeState((state) => !state);
-  }, []);
+	const [eyeState, setEyeState] = useState(true);
+	const onAyeClick = useCallback(() => {
+		setEyeState((state) => !state);
+	}, []);
 
-  const handleEvents = useHandleChangeField(setFormState);
+	const handleEvents = useHandleChangeField(setFormState);
 
-  return (
-    <OneFormLayout>
-      <TextField
-            id="login"
-            label="email"
-            value={formState.login}
-            error={errorsState.login}
-            onChange={handleEvents}
-            onBlur={handleEvents}
-          />
-          <PasswordField
-            id="password"
-            label="password"
-            value={formState.password}
-            error={errorsState.password}
-            onChange={handleEvents}
-            onBlur={handleEvents}
-            onEyeClick={onAyeClick}
-            isHidden={eyeState}
-          />
-          <Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>Log in</Button>
-    </OneFormLayout>
-  );
+	return (
+		<OneFormLayout>
+			<TextField id="login" label="email" value={formState.login} error={errorsState.login} onChange={handleEvents} onBlur={handleEvents} />
+			<PasswordField
+				id="password"
+				label="password"
+				value={formState.password}
+				error={errorsState.password}
+				onChange={handleEvents}
+				onBlur={handleEvents}
+				onEyeClick={onAyeClick}
+				isHidden={eyeState}
+			/>
+			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>
+				Log in
+			</Button>
+		</OneFormLayout>
+	);
 }
