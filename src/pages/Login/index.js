@@ -11,6 +11,8 @@ import getFirstError from '../../validators/helpers/getFirstError';
 import emptyValidator from '../../validators/stringValidators/emptyValidator';
 import minLengthValidatorBuilder from '../../validators/stringValidators/minLengthValidatorBuilder';
 import useRequiredFieldsFilled from '../../validators/useRequiredFieldsFilled';
+import { useApolloClient } from '@apollo/client';
+import signIn from '../../api/mutations/signIn';
 
 const INITIAL_FORM_STATE = { login: '', password: '' };
 const VALIDATION_CONFIG = {
@@ -26,6 +28,14 @@ export default function Index() {
 
 	const handleEvents = useHandleChangeField(setFormState);
 
+	const client = useApolloClient();
+	const handleSignIn = async (event) => {
+		event.preventDefault();
+		if (!isHasError && isRequiredFieldFilled) {
+			await signIn(client, formState);
+		}
+	};
+
 	return (
 		<OneFormLayout>
 			<TextField id="login" label="email" value={formState.login} error={errorsState.login} onChange={handleEvents} onBlur={handleEvents} />
@@ -37,7 +47,7 @@ export default function Index() {
 				onChange={handleEvents}
 				onBlur={handleEvents}
 			/>
-			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>
+			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled} onClick={handleSignIn}>
 				Log in
 			</Button>
 		</OneFormLayout>
