@@ -1,5 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import Button from '../components/form/inputs/Button';
+import useAuthUser from '../globals/AuthUser';
 
 export default function Index() {
-	return <div>Index page</div>;
+	const { dispatch, state: AuthUserState } = useAuthUser();
+	const navigate = useNavigate();
+	const handleClick = () => {
+		dispatch({ type: 'logout' });
+		navigate('/login');
+	};
+
+	useEffect(() => {
+		if (!AuthUserState.user) {
+			navigate('/login');
+		}
+	}, [AuthUserState.user]);
+
+	return (
+		<div>
+			Index page
+			<Link to={'/login'}> Go to login page </Link>
+			<Link to={'/registration'}> Go to registration page </Link>
+			<Button onClick={handleClick}> Logout </Button>
+		</div>
+	);
 }

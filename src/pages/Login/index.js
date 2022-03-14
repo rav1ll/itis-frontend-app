@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import OneFormLayout from '../../components/Layouts/OneFormLayout';
 import Button from '../../components/form/inputs/Button';
@@ -37,11 +38,16 @@ export default function Index() {
 		if (!isHasError && isRequiredFieldFilled) {
 			dispatch({ type: 'loading' });
 			const result = await signIn(client, formState);
-			dispatch({ type: 'loaded', payload: result.me });
-			localStorage.setItem(ACCESS_TOKEN, result.accessToken);
-			localStorage.setItem(ACCESS_TOKEN, result.refreshToken);
+			dispatch({ type: 'loaded', payload: result });
 		}
 	};
+
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (AuthUser.user) {
+			navigate('/', { replace: true });
+		}
+	}, [AuthUser.user]);
 
 	return (
 		<OneFormLayout>

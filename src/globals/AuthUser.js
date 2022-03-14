@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useMemo, useReducer } from 'react';
 
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/authKeys';
+
 const INITIAL_STATE = { user: null, isLoading: null };
 
 const UserContext = createContext();
@@ -12,15 +14,16 @@ function reducer(state, action) {
 				isLoading: true
 			};
 		case 'loaded':
+			localStorage.setItem(ACCESS_TOKEN, action.payload.accessToken);
+			localStorage.setItem(REFRESH_TOKEN, action.payload.refreshToken);
 			return {
-				user: action.payload,
+				user: action.payload.me,
 				isLoading: false
 			};
 		case 'logout':
-			return {
-				...state,
-				user: null
-			};
+			localStorage.removeItem(ACCESS_TOKEN);
+			localStorage.removeItem(REFRESH_TOKEN);
+			return INITIAL_STATE;
 		default:
 			return state;
 	}

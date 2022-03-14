@@ -10,11 +10,6 @@ const SIGN_IN_MUTATION = gql`
 				firstName
 				id
 				lastName
-				projects {
-					id
-					name
-					description
-				}
 			}
 			refreshToken
 		}
