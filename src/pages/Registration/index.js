@@ -34,12 +34,6 @@ export default function Registration() {
 	const [formState, setFormState] = useState(INITIAL_FORM_STATE);
 	const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
 
-	const [eyeState, setEyeState] = useState(true);
-
-	const onAyeClick = useCallback(() => {
-		setEyeState((state) => !state);
-	}, []);
-
 	const isRequiredFieldFilled = useRequiredFieldsFilled(formState, Object.keys(INITIAL_FORM_STATE));
 
 	const handleEvents = useHandleChangeField(setFormState);
@@ -77,8 +71,6 @@ export default function Registration() {
 				onBlur={handleEvents}
 				value={formState.password}
 				error={errorsState.password}
-				onEyeClick={onAyeClick}
-				isHidden={eyeState}
 			/>
 			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>
 				Register

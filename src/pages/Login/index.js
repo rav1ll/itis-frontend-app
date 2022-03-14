@@ -24,11 +24,6 @@ export default function Index() {
 
 	const isRequiredFieldFilled = useRequiredFieldsFilled(formState, Object.keys(INITIAL_FORM_STATE));
 
-	const [eyeState, setEyeState] = useState(true);
-	const onAyeClick = useCallback(() => {
-		setEyeState((state) => !state);
-	}, []);
-
 	const handleEvents = useHandleChangeField(setFormState);
 
 	return (
@@ -41,8 +36,6 @@ export default function Index() {
 				error={errorsState.password}
 				onChange={handleEvents}
 				onBlur={handleEvents}
-				onEyeClick={onAyeClick}
-				isHidden={eyeState}
 			/>
 			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>
 				Log in
