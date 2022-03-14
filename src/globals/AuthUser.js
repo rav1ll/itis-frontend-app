@@ -1,6 +1,8 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import { useApolloClient } from '@apollo/client';
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/authKeys';
+import currentUserQuery from '../api/query/currentUser';
 
 const INITIAL_STATE = { user: null, isLoading: null };
 
@@ -33,6 +35,24 @@ export function AuthUser({ children }) {
 	const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
 	const value = useMemo(() => ({ state, dispatch }), [state]);
+
+	const client = useApolloClient();
+	useEffect(async () => {
+		const accessToken = localStorage.getItem(ACCESS_TOKEN);
+		const refreshToken = localStorage.getItem(REFRESH_TOKEN);
+		if (!!accessToken && !!refreshToken) {
+			dispatch({ type: 'loading' });
+			const me = await currentUserQuery(client);
+			dispatch({
+				type: 'loaded',
+				payload: {
+					me,
+					refreshToken,
+					accessToken
+				}
+			});
+		}
+	}, []);
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
