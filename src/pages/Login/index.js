@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import OneFormLayout from '../../components/Layouts/OneFormLayout';
 import Button from '../../components/form/inputs/Button';
@@ -13,6 +13,8 @@ import minLengthValidatorBuilder from '../../validators/stringValidators/minLeng
 import useRequiredFieldsFilled from '../../validators/useRequiredFieldsFilled';
 import { useApolloClient } from '@apollo/client';
 import signIn from '../../api/mutations/signIn';
+import useAuthUser from '../../globals/AuthUser';
+import { ACCESS_TOKEN } from '../../constants/authKeys';
 
 const INITIAL_FORM_STATE = { login: '', password: '' };
 const VALIDATION_CONFIG = {
@@ -28,11 +30,16 @@ export default function Index() {
 
 	const handleEvents = useHandleChangeField(setFormState);
 
+	const { dispatch, state: AuthUser } = useAuthUser();
 	const client = useApolloClient();
 	const handleSignIn = async (event) => {
 		event.preventDefault();
 		if (!isHasError && isRequiredFieldFilled) {
-			await signIn(client, formState);
+			dispatch({ type: 'loading' });
+			const result = await signIn(client, formState);
+			dispatch({ type: 'loaded', payload: result.me });
+			localStorage.setItem(ACCESS_TOKEN, result.accessToken);
+			localStorage.setItem(ACCESS_TOKEN, result.refreshToken);
 		}
 	};
 
@@ -47,7 +54,7 @@ export default function Index() {
 				onChange={handleEvents}
 				onBlur={handleEvents}
 			/>
-			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled} onClick={handleSignIn}>
+			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled || AuthUser.isLoading} onClick={handleSignIn}>
 				Log in
 			</Button>
 		</OneFormLayout>

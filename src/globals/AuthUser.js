@@ -6,10 +6,15 @@ const UserContext = createContext();
 
 function reducer(state, action) {
 	switch (action.type) {
-		case 'update':
+		case 'loading':
 			return {
 				...state,
-				user: action.payload
+				isLoading: true
+			};
+		case 'loaded':
+			return {
+				user: action.payload,
+				isLoading: false
 			};
 		case 'logout':
 			return {
