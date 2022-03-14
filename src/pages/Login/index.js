@@ -15,7 +15,6 @@ import useRequiredFieldsFilled from '../../validators/useRequiredFieldsFilled';
 import { useApolloClient } from '@apollo/client';
 import signIn from '../../api/mutations/signIn';
 import useAuthUser from '../../globals/AuthUser';
-import { ACCESS_TOKEN } from '../../constants/authKeys';
 
 const INITIAL_FORM_STATE = { login: '', password: '' };
 const VALIDATION_CONFIG = {
