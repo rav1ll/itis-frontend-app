@@ -5,6 +5,7 @@
     "allowImportExportEverywhere": true,
     "requireConfigFile": false
   },
+  "plugins": ["prettier"],
   "settings": {
     "react": {
       "version": "detect"
@@ -26,6 +27,7 @@
       {
         "ignoreRestSiblings": true
       }
-    ]
+    ],
+    "prettier/prettier": "error"
   }
 }
