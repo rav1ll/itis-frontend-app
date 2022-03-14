@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import OneFormLayout from '../../components/Layouts/OneFormLayout';
 import useHandleChangeField from '../../components/form/utils/useHandleChangeField';
@@ -13,6 +13,8 @@ import latinNumbersValidator from '../../validators/stringValidators/latinNumber
 import minLengthValidatorBuilder from '../../validators/stringValidators/minLengthValidatorBuilder';
 import maxLengthValidatorBuilder from '../../validators/stringValidators/maxLengthValidatorBuilder';
 import useRequiredFieldsFilled from '../../validators/useRequiredFieldsFilled';
+import { useNavigate } from 'react-router-dom';
+import useAuthUser from '../../globals/AuthUser';
 
 const INITIAL_FORM_STATE = {
 	email: '',
@@ -34,15 +36,17 @@ export default function Registration() {
 	const [formState, setFormState] = useState(INITIAL_FORM_STATE);
 	const [errorsState, isHasError] = useSharedValidation(formState, VALIDATION_CONFIG);
 
-	const [eyeState, setEyeState] = useState(true);
-
-	const onAyeClick = useCallback(() => {
-		setEyeState((state) => !state);
-	}, []);
-
 	const isRequiredFieldFilled = useRequiredFieldsFilled(formState, Object.keys(INITIAL_FORM_STATE));
 
 	const handleEvents = useHandleChangeField(setFormState);
+
+	const { state: AuthUser } = useAuthUser();
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (AuthUser.user) {
+			navigate('/', { replace: true });
+		}
+	}, [AuthUser.user]);
 
 	return (
 		<OneFormLayout>
@@ -77,8 +81,6 @@ export default function Registration() {
 				onBlur={handleEvents}
 				value={formState.password}
 				error={errorsState.password}
-				onEyeClick={onAyeClick}
-				isHidden={eyeState}
 			/>
 			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>
 				Register

@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import OneFormLayout from '../../components/Layouts/OneFormLayout';
 import Button from '../../components/form/inputs/Button';
@@ -13,6 +14,7 @@ import minLengthValidatorBuilder from '../../validators/stringValidators/minLeng
 import useRequiredFieldsFilled from '../../validators/useRequiredFieldsFilled';
 import { useApolloClient } from '@apollo/client';
 import signIn from '../../api/mutations/signIn';
+import useAuthUser from '../../globals/AuthUser';
 
 const INITIAL_FORM_STATE = { login: '', password: '' };
 const VALIDATION_CONFIG = {
@@ -26,20 +28,25 @@ export default function Index() {
 
 	const isRequiredFieldFilled = useRequiredFieldsFilled(formState, Object.keys(INITIAL_FORM_STATE));
 
-	const [eyeState, setEyeState] = useState(true);
-	const onAyeClick = useCallback(() => {
-		setEyeState((state) => !state);
-	}, []);
-
 	const handleEvents = useHandleChangeField(setFormState);
 
+	const { dispatch, state: AuthUser } = useAuthUser();
 	const client = useApolloClient();
 	const handleSignIn = async (event) => {
 		event.preventDefault();
 		if (!isHasError && isRequiredFieldFilled) {
-			await signIn(client, formState);
+			dispatch({ type: 'loading' });
+			const result = await signIn(client, formState);
+			dispatch({ type: 'loaded', payload: result });
 		}
 	};
+
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (AuthUser.user) {
+			navigate('/', { replace: true });
+		}
+	}, [AuthUser.user]);
 
 	return (
 		<OneFormLayout>
@@ -51,10 +58,8 @@ export default function Index() {
 				error={errorsState.password}
 				onChange={handleEvents}
 				onBlur={handleEvents}
-				onEyeClick={onAyeClick}
-				isHidden={eyeState}
 			/>
-			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled} onClick={handleSignIn}>
+			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled || AuthUser.isLoading} onClick={handleSignIn}>
 				Log in
 			</Button>
 		</OneFormLayout>
