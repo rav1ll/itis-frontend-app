@@ -51,7 +51,7 @@ export default function Index() {
 	return (
 		<OneFormLayout>
 			<TextField id="login" label="email" value={formState.login} error={errorsState.login} onChange={handleEvents} onBlur={handleEvents} />
-			<PasswordField
+				<PasswordField
 				id="password"
 				label="password"
 				value={formState.password}
