@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
+import EnvSpecificRouter from 'components/EnvSpecificRouter';
 
 import { AuthUser } from 'globals/AuthUser';
 
@@ -9,13 +11,13 @@ import RegistrationPage from 'pages/Registration';
 function App() {
 	return (
 		<AuthUser>
-			<Router basename={process.env.PUBLIC_URL}>
+			<EnvSpecificRouter>
 				<Routes>
 					<Route path={'/'} element={<MainPage />} />
 					<Route path={'/login'} element={<LoginPage />} />
 					<Route path={'/registration'} element={<RegistrationPage />} />
 				</Routes>
-			</Router>
+			</EnvSpecificRouter>
 		</AuthUser>
 	);
 }
