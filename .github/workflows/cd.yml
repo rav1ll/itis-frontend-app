@@ -19,6 +19,8 @@ jobs:
         run: yarn --frozen-lockfile --production
       - name: building
         run: yarn build
+        env:
+          REACT_APP_API_URL: https://itis-task-tracker-be.herokuapp.com
       - name: deploy
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
