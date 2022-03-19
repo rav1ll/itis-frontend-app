@@ -9,7 +9,7 @@ import RegistrationPage from 'pages/Registration';
 function App() {
 	return (
 		<AuthUser>
-			<Router>
+			<Router basename={process.env.PUBLIC_URL}>
 				<Routes>
 					<Route path={'/'} element={<MainPage />} />
 					<Route path={'/login'} element={<LoginPage />} />
