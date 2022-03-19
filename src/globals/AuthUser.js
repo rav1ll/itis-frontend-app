@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 import { useApolloClient } from '@apollo/client';
 
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/authKeys';
-import currentUserQuery from '../api/query/currentUser';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from 'constants/authKeys';
+import currentUserQuery from 'api/query/currentUser';
 
 const INITIAL_STATE = { user: null, isLoading: null };
 

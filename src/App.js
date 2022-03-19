@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import LoginPage from './pages/Login';
-import MainPage from './pages/Index';
-import RegistrationPage from './pages/Registration';
+import { AuthUser } from 'globals/AuthUser';
 
-import { AuthUser } from './globals/AuthUser';
+import LoginPage from 'pages/Login';
+import MainPage from 'pages/Index';
+import RegistrationPage from 'pages/Registration';
 
 function App() {
 	return (
