@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import Button from '../components/form/inputs/Button';
-import useAuthUser from '../globals/AuthUser';
+import useAuthUser from 'globals/AuthUser';
+import Button from 'components/form/inputs/Button';
 
 export default function Index() {
 	const { dispatch, state: AuthUserState } = useAuthUser();

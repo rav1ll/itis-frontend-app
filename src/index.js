@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/client';
 
+import GlobalStyles from 'globals/styles';
+import ApolloClient from 'api/ApolloClient';
+
 import App from './App';
-import GlobalStyles from './globals/styles';
-import ApolloClient from './api/ApolloClient';
 
 ReactDOM.render(
 	<ApolloProvider client={ApolloClient}>

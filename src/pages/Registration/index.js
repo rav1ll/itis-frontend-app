@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-
-import OneFormLayout from '../../components/Layouts/OneFormLayout';
-import useHandleChangeField from '../../components/form/utils/useHandleChangeField';
-import TextField from '../../components/form/formFields/TextField';
-import PasswordField from '../../components/form/formFields/PasswordField';
-import Button from '../../components/form/inputs/Button';
-import emailValidator from '../../validators/stringValidators/emailValidator';
-import useSharedValidation from '../../validators/useSharedValidation';
-import getFirstError from '../../validators/helpers/getFirstError';
-import emptyValidator from '../../validators/stringValidators/emptyValidator';
-import latinNumbersValidator from '../../validators/stringValidators/latinNumbersValidator';
-import minLengthValidatorBuilder from '../../validators/stringValidators/minLengthValidatorBuilder';
-import maxLengthValidatorBuilder from '../../validators/stringValidators/maxLengthValidatorBuilder';
-import useRequiredFieldsFilled from '../../validators/useRequiredFieldsFilled';
 import { useNavigate } from 'react-router-dom';
-import useAuthUser from '../../globals/AuthUser';
+
+import useAuthUser from 'globals/AuthUser';
+
+import emailValidator from 'validators/stringValidators/emailValidator';
+import useSharedValidation from 'validators/useSharedValidation';
+import getFirstError from 'validators/helpers/getFirstError';
+import emptyValidator from 'validators/stringValidators/emptyValidator';
+import latinNumbersValidator from 'validators/stringValidators/latinNumbersValidator';
+import minLengthValidatorBuilder from 'validators/stringValidators/minLengthValidatorBuilder';
+import maxLengthValidatorBuilder from 'validators/stringValidators/maxLengthValidatorBuilder';
+import useRequiredFieldsFilled from 'validators/useRequiredFieldsFilled';
+
+import OneFormLayout from 'components/Layouts/OneFormLayout';
+import useHandleChangeField from 'components/form/utils/useHandleChangeField';
+import TextField from 'components/form/formFields/TextField';
+import PasswordField from 'components/form/formFields/PasswordField';
+import Button from 'components/form/inputs/Button';
 
 const INITIAL_FORM_STATE = {
 	email: '',
