@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 
 import useAuthUser from 'globals/AuthUser';
 
@@ -17,6 +18,8 @@ import useHandleChangeField from 'components/form/utils/useHandleChangeField';
 import TextField from 'components/form/formFields/TextField';
 import PasswordField from 'components/form/formFields/PasswordField';
 import Button from 'components/form/inputs/Button';
+
+import signUp from 'api/mutations/signUp';
 
 const INITIAL_FORM_STATE = {
 	email: '',
@@ -42,13 +45,23 @@ export default function Registration() {
 
 	const handleEvents = useHandleChangeField(setFormState);
 
-	const { state: AuthUser } = useAuthUser();
+	const { state: AuthUser, dispatch } = useAuthUser();
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (AuthUser.user) {
 			navigate('/', { replace: true });
 		}
 	}, [AuthUser.user]);
+
+	const client = useApolloClient();
+	const handleRegister = async (event) => {
+		event.preventDefault();
+		if (!isHasError && isRequiredFieldFilled && !AuthUser.isLoading) {
+			dispatch({ type: 'loading' });
+			const payload = await signUp(client, formState);
+			dispatch({ type: 'loaded', payload });
+		}
+	};
 
 	return (
 		<OneFormLayout>
@@ -84,7 +97,7 @@ export default function Registration() {
 				value={formState.password}
 				error={errorsState.password}
 			/>
-			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled}>
+			<Button type="submit" disabled={isHasError || !isRequiredFieldFilled || AuthUser.isLoading} onClick={handleRegister}>
 				Register
 			</Button>
 		</OneFormLayout>
