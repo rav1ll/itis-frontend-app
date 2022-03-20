@@ -16,7 +16,7 @@ const SIGN_UP_MUTATION = gql`
 	}
 `;
 
-export default async function signup(client, params) {
+export default async function signUp(client, params) {
 	const {
 		data: { signup }
 	} = await client.mutate({ mutation: SIGN_UP_MUTATION, variables: params });
