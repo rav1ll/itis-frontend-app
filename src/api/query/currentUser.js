@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import project from '../fragments/project';
 
 const USER_ME_QUERY = gql`
 	query currentUser {
@@ -8,6 +9,9 @@ const USER_ME_QUERY = gql`
 			firstName
 			id
 			lastName
+			projects {
+				...ProjectFragment
+			}
 		}
 	}
 `;
