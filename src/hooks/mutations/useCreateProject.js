@@ -4,7 +4,8 @@ import getCurrentUser from 'api/query/getCurrentUser';
 
 const useCreateProject = () => {
 	const [mutation, { data }] = useMutation(createProject, {
-		refetchQueries: [{ query: getCurrentUser }]);
+		refetchQueries: [{ query: getCurrentUser }]
+	});
 
 	const create = async (name, description) => {
 		await mutation({ variables: { name, description } });

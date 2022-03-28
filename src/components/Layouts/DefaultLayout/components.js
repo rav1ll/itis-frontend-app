@@ -24,6 +24,6 @@ export const Content = styled.div`
 	height: 100vh;
 `;
 
-export const MainPage = styled.main`
+export const MainBlock = styled.main`
 	background-color: #92adde;
 `;

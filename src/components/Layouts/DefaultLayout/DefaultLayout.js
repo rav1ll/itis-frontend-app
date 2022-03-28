@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Header, HeaderTitle, AppName, Content, MainPage } from './components';
+import { Header, HeaderTitle, AppName, Content, MainBlock } from './components';
 
 export default function DefaultLayout({ title, children }) {
 	return (
@@ -9,7 +9,7 @@ export default function DefaultLayout({ title, children }) {
 				<HeaderTitle>{title}</HeaderTitle>
 				<AppName>Task tracker</AppName>
 			</Header>
-			<MainPage>{children}</MainPage>
+			<MainBlock>{children}</MainBlock>
 		</Content>
 	);
 }
