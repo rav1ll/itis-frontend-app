@@ -24,7 +24,7 @@ export const Container = styled.div(({ $isError , $disabled}) => {
 
 		${$disabled &&
 		css`
-			border-color: grey;
+			border-color: snow;
 		`}
 	`;
 });

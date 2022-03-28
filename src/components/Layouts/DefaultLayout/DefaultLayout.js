@@ -7,7 +7,7 @@ export default function DefaultLayout({ title, children }) {
 		<Content>
 			<Header>
 				<HeaderTitle>{title}</HeaderTitle>
-				<AppName>Task tracker</AppName>
+				<AppName>Task tracker Web</AppName>
 			</Header>
 			<MainBlock>{children}</MainBlock>
 		</Content>
