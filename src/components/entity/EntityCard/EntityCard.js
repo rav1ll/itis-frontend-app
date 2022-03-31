@@ -5,15 +5,15 @@ import Button from 'components/form/inputs/Button';
 
 import { Wrapper, Header, Form, ButtonWrapper } from './components';
 
-export default function EntityCard({ title, name, id, description, onRemoveClick }) {
+export default function EntityCard({ title, name, id, description, onRemoveClick, onUpdateClick }) {
 	return (
 		<Wrapper>
 			<Header>
 				{title}
 				<ButtonWrapper>
-					<button className="btn edit">
-            Edit
-          </button>
+					<Button className="btn edit" onClick={() => onUpdateClick(id)}>
+						Edit
+					</Button>
 					<Button className="btn remove" onClick={() => onRemoveClick(id)}>
 						Remove
 					</Button>

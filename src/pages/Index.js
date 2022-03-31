@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuthUser from 'globals/AuthUser';
 import useCreateProject from 'hooks/mutations/useCreateProject';
 import useRemoveProject from 'hooks/mutations/useRemoveProject';
+//import useUpdateProject from 'hooks/mutations/useUpdateProject';
 
 import DefaultLayout from 'components/Layouts/DefaultLayout/DefaultLayout';
 import EntityListWrapper from 'components/entity/EntityListWrapper/EntityListWrapper';
@@ -30,6 +31,7 @@ export default function Index() {
 
 	const { create } = useCreateProject();
 	const { remove } = useRemoveProject();
+	//const { update } = useUpdateProject();
 
 	const handleClick = async (event) => {
 		event.preventDefault();
@@ -56,6 +58,7 @@ export default function Index() {
 						name={project.name}
 						description={project.description}
 						onRemoveClick={remove}
+						//onEditClick={update}
 					/>
 				))}
 			</EntityListWrapper>

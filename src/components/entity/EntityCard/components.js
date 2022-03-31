@@ -13,7 +13,7 @@ export const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #e3c09b;
+	background-color: #6699ff;
 	padding: 0.5rem;
 	border-top-left-radius: ${defaultBorderRadius};
 	border-top-right-radius: ${defaultBorderRadius};
